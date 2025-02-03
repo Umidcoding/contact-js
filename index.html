@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson</title>
+  <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+  <!-- font -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/flexboxgrid.min.css">
+  <link rel="stylesheet" href="css/main.min.css">
+</head>
+<body>
+  <div class="contact__search">
+    <form>
+      <input class="searchinp" type="search" placeholder="Search">
+    </form>
+  </div>
+  <div class="contact__btns">
+  <button class="contact__ctbtn active" type="button">All</button>
+    <button class="contact__ctbtn" type="button">Family</button>
+    <button class="contact__ctbtn" type="button">Freinds</button>
+    <button class="contact__ctbtn" type="button">Relatives</button>
+  </div>
+    <div class="contact__group">
+      <div class="contact__forms col-md-6">
+        <h1 class="contact__title">New Contact</h1>
+        <form class="contact__form">
+          <input class="contact__inp name" id="inp" type="text" placeholder="Name Surname" required aria-label="name" name="name">
+          <input class="contact__inp relation" id="inp" type="text" list="category" placeholder="Relationship" required aria-label="relation" name="relatio">
+           <datalist id="category">
+             <option>Family</option>
+             <option>Freinds</option>
+             <option>Relatives</option>
+           </datalist>
+           <input class="contact__inp tel" type="text" placeholder="Phone" required aria-label="phone" name="phone">
+           <div>
+            <button class="contact__btn" type="submit">Add Contact</button>
+           </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <h2 class="contact__title">Contact</h2>
+        <ul class="contact__list">
+
+        </ul>
+      </div>
+    </div>
+  <script src="js/main.js"></script>
+</body>
+</html>
