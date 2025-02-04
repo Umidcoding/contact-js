@@ -38,29 +38,33 @@ function addContact(e) {
   let telValue = inputTel.value;
 
   if(telValue.match(/^(\+998?\d{9})$/)) {
-    let newContact = {
-      name:nameValue.toLowerCase(),
-      rel:relationValue,
-      tel:telValue
-    }
-    arr.push(newContact)
 
     
+    let filterarr = arr.some((item) => item.tel === telValue)
 
-    
-    if(relationValue === "Family") {
-      family.push(newContact)
-     
-      
-    } else if(relationValue === "Freinds") {
-      freinds.push(newContact)
-      
-    } else if(relationValue === "Relatives") {
-      relatives.push(newContact)
-    }
+    if(filterarr) {
+      alert("Bu raqam allaqachon mavjud...")
+    } else {
+      let newContact = {
+        name:nameValue.toLowerCase(),
+        rel:relationValue.toLowerCase(),
+        tel:telValue
+      }
+      arr.push(newContact)
+
+      if(relationValue === "Family") {
+        family.push(newContact)
+       
+      } else if(relationValue === "Freinds") {
+        freinds.push(newContact)
+        
+      } else if(relationValue === "Relatives") {
+        relatives.push(newContact)
+      }
 
     showContact(arr)
     e.target.reset()
+    }
   } else {
     alert("Raqamni to'g'ri formatda kiriting.")
   }
@@ -69,7 +73,7 @@ function addContact(e) {
 
 function showContact(data) {
   resultList.innerHTML = ''
-
+  
   data.forEach((item, index) => {
     let li = document.createElement('li');
     li.classList.add('list-group-item','contact__item')
@@ -79,20 +83,33 @@ function showContact(data) {
     let isName = h3.textContent.charAt(0).toUpperCase() + h3.textContent.slice(1)
     h3.textContent = isName
     let p = document.createElement('p');
-    p.textContent = item['rel']
-
+    p.textContent = item['rel'];
+    let isrel = p.textContent.charAt(0).toUpperCase() + p.textContent.slice(1)
+    p.textContent = isrel
+   
     let a = document.createElement('a');
     a.classList.add('btn', 'btn-primary');
     a.textContent = item['tel']
     a.setAttribute("href", `tel:${item.tel}`)
 
-    li.append(h3,p,a);
+    let trashBtn = document.createElement("span");
+    trashBtn.classList.add('btn', 'btn-danger','float-end', 'trashbtn')
+    trashBtn.innerHTML = `<i class='bx bx-trash'></i>`
+    li.append(h3,p,a,trashBtn);
     resultList.append(li)
+
+    resultList.addEventListener('click', (e) => {
+      if(e.target.closest('.trashbtn')) {
+        let li = e.target.closest('li');
+        li.remove()
+      }
+    })
   })
 }
 
-function resFunc(event) {
-  
+
+
+function resFunc(event) {  
   if(event.target && event.target.classList.contains('contact__ctbtn')) {
     btns.forEach((item,index) => {
       if(event.target == item) {
@@ -110,9 +127,11 @@ function resFunc(event) {
   }
 }
 
+
+
 inputSearch.addEventListener("keyup", (e) => {
   let value = e.target.value.toLowerCase();
-  let filterName = arr.filter(isname => isname.name.includes(value) || isname.tel.includes(value))
+  let filterName = arr.filter(isname => isname.name.includes(value) || isname.tel.includes(value) || isname.rel.includes(value))
 
   showContact(filterName)
  })
